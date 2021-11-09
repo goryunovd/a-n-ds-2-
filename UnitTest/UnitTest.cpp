@@ -16,7 +16,7 @@ namespace UnitTest
 			Assert::AreEqual(BinarySearch(massiv, size, 2), 1);//random index
 			Assert::AreEqual(BinarySearch(massiv, size, 1), 0);//element at first index
 			Assert::AreEqual(BinarySearch(massiv, size, 9), 8);//element at last index;
-			bool check = 1;
+			bool check = 0;
 			try
 			{
 				BinarySearch(massiv, size, 11);
@@ -26,6 +26,16 @@ namespace UnitTest
 				check = true;
 			}
 			Assert::IsTrue(check);
+			int* massiv_from_high_to_low = new int[10];
+			for (int i = 0; i < 10; i++) { massiv[i] = 10 - i; }//10-9-8-7-6-5-4-3-2-1
+			bool checl_HIGHlow = 0;
+			try 
+			{
+				BinarySearch(massiv_from_high_to_low, size, 6);
+			}
+			catch (std::invalid_argument)
+			{checl_HIGHlow = 1; }
+			Assert::IsTrue(checl_HIGHlow);
 		}
 
 

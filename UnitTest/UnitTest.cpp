@@ -38,6 +38,35 @@ namespace UnitTest
 			Assert::IsTrue(checl_HIGHlow);
 		}
 
-
+		TEST_METHOD(Test_bubbleSort) 
+		{
+			int size = 10;
+			int* massiv = new int[size];
+			for (int i = 0; i < size; i++) { massiv[i] = i; }//0-1-2-3-4-5-6-7-8-9
+			BubbleSort(massiv, size);
+			Assert::AreEqual(massiv[0], 0);
+			Assert::AreEqual(massiv[1], 1);
+			Assert::AreEqual(massiv[2], 2);
+			Assert::AreEqual(massiv[3], 3);
+			Assert::AreEqual(massiv[4], 4);
+			Assert::AreEqual(massiv[5], 5);
+			Assert::AreEqual(massiv[6], 6);
+			Assert::AreEqual(massiv[7], 7);
+			Assert::AreEqual(massiv[8], 8);
+			Assert::AreEqual(massiv[9], 9);
+			for (int i = 0; i < size; i++) { massiv[i] = 9 - i; }
+			BubbleSort(massiv, size);
+			Assert::AreEqual(massiv[0], 0);
+			Assert::AreEqual(massiv[1], 1);
+			Assert::AreEqual(massiv[2], 2);
+			Assert::AreEqual(massiv[3], 3);
+			Assert::AreEqual(massiv[4], 4);
+			Assert::AreEqual(massiv[5], 5);
+			Assert::AreEqual(massiv[6], 6);
+			Assert::AreEqual(massiv[7], 7);
+			Assert::AreEqual(massiv[8], 8);
+			Assert::AreEqual(massiv[9], 9);
+			
+		}
 	};
 }

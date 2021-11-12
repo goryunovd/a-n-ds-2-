@@ -1,4 +1,5 @@
 #include "pch.h"
+#include<ctime>
 #include "CppUnitTest.h"
 #include"..\a'n'ds (2)\a'n'ds (2).cpp"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -37,7 +38,23 @@ namespace UnitTest
 			{checl_HIGHlow = 1; }
 			Assert::IsTrue(checl_HIGHlow);
 		}
-
+		TEST_METHOD(Test_QuickSort)
+		{
+			int size =10;
+			int* massiv = new int[size];
+			for (int i = 0; i < size; i++) { massiv[i] = 9 - i; }//9-8-7-6-5-4-3-2-1-0
+			QuickSort(massiv,0, size-1);
+			Assert::AreEqual(massiv[0], 0);
+			Assert::AreEqual(massiv[1], 1);
+			Assert::AreEqual(massiv[2], 2);
+			Assert::AreEqual(massiv[3], 3);
+			Assert::AreEqual(massiv[4], 4);
+			Assert::AreEqual(massiv[5], 5);
+			Assert::AreEqual(massiv[6], 6);
+			Assert::AreEqual(massiv[7], 7);
+			Assert::AreEqual(massiv[8], 8);
+			Assert::AreEqual(massiv[9], 9);
+		}
 		TEST_METHOD(Test_bubbleSort) 
 		{
 			int size = 10;
@@ -65,8 +82,21 @@ namespace UnitTest
 			Assert::AreEqual(massiv[6], 6);
 			Assert::AreEqual(massiv[7], 7);
 			Assert::AreEqual(massiv[8], 8);
-			Assert::AreEqual(massiv[9], 9);
-			
+			Assert::AreEqual(massiv[9], 9);	
 		}
+		TEST_METHOD(Test_Bogosort)
+		{
+			srand(time(NULL));
+			int size = 5;
+			int* massiv = new int[size];
+			for (int i = 0; i < size; i++) { massiv[i] = 4 - i; }//9-8-7-6-5-4-3-2-1-0
+			BogoSort(massiv, size);
+			Assert::AreEqual(massiv[0], 0);
+			Assert::AreEqual(massiv[1], 1);
+			Assert::AreEqual(massiv[2], 2);
+			Assert::AreEqual(massiv[3], 3);
+			Assert::AreEqual(massiv[4], 4);
+		}
+		
 	};
 }

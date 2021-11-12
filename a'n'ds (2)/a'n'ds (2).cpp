@@ -71,27 +71,32 @@ void BubbleSort(int* array, int size)
 		if (flag == 0) break;
 	}
 }
-bool isSorted(int* array, int index)
+bool isSorted(int* array, int size)
 {
-	while (index> 1) {
-		if (array[index] < array[index - 1])
+	for (int i = 0; i < size - 1; i++) {
+		if (array[i] > array[i + 1])
 			return false;
-		index--;
 	}
+	
 	return true;
 }
-void send_to_god_of_random(int* array, int index)
+void send_to_god_of_random(int* array, int size)
 {
-	for (int i = 0; i < index; i++)
-		swap(array[i], array[rand() % index]);
+	for (int i = 0; i < size; i++)
+		swap(array[i], array[rand() % size]);
 }
-void bogosort(int* array, int index)
+void BogoSort(int* array, int size)
 {
-	while (!isSorted(array, index))
-		send_to_god_of_random(array, index);
+	while (!isSorted(array, size))
+		send_to_god_of_random(array, size);
 }
-void CountingSort(int* massiv, int size) 
+void CountingSort(int* massiv, int size)
+//for this sort we use array of type char but we can also sort as int in case char has his own int index am i right?0-0
+//ASCII table
 {
+	int high_number=0;
+	for (int i=0;i<size;i++)
+	{		if (massiv[i] > high_number) { high_number = massiv[i]; }}
 
 }
 int main()
@@ -103,7 +108,9 @@ int main()
 	cout << endl;
 	clock_t begin = clock(); 
 //	cout<<BinarySearch(array, size1, 2);
-	BubbleSort(array, size1);
+	//BubbleSort(array, size1);
+	QuickSort(array, 0, size1-1);
+	//BogoSort(array, size1);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 	cout << fixed << endl;

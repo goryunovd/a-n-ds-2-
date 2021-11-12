@@ -90,32 +90,57 @@ void BogoSort(int* array, int size)
 	while (!isSorted(array, size))
 		send_to_god_of_random(array, size);
 }
-void CountingSort(int* massiv, int size)
+void CountingSort(char* array, int size)
 //for this sort we use array of type char but we can also sort as int in case char has his own int index am i right?0-0
 //ASCII table
 {
-	int high_number=0;
-	for (int i=0;i<size;i++)
-	{		if (massiv[i] > high_number) { high_number = massiv[i]; }}
-
+	int high_number = 0; int z;
+	for (int i=0;i<size;i++)	{		if (array[i] > high_number) { high_number = array[i];}	}
+	high_number++;
+	int* count_array = new int[high_number];
+	for (int i =0 ; i < high_number; i++) //lets count how many 
+	{
+		count_array[i] = 0;
+	}
+	for (int i = 0; i < size; i++) 
+	{ z = array[i];
+	count_array[z]++; 
+	}
+	for (int i =0 ; i < high_number; i++)
+	{
+		cout << count_array[i]<<" ";
+	}
+	cout << endl;
+	int i = 0;
+	for (int j = 0; j < high_number; j++) {
+		while (count_array[j] != 0) {
+			array[i] = j ;
+			count_array[j]--;
+			i++;
+		}
+	}
 }
 int main()
 {
 	srand(time(NULL));
 	int size1 = 10;
+	char* array1 = new char[size1];
+	for (int i = 0; i < size1; i++) { cin >> array1[i]; }//zyxwvutsrqp	))('&%$###!!!
+	cout << endl;
+	for (int i = 0; i < size1; i++) { cout << array1[i]; }
 	auto* array = new int[size1];//use auto in case we have int & char type's of array
-	for (int i = 0; i < size1; i++){array[i] = rand()%100;		cout << array[i] << " "; 	}
+	//for (int i = 0; i < size1; i++){array[i] = rand()%100;		cout << array[i] << " "; 	}
 	cout << endl;
 	clock_t begin = clock(); 
 //	cout<<BinarySearch(array, size1, 2);
 	//BubbleSort(array, size1);
-	QuickSort(array, 0, size1-1);
+	//QuickSort(array, 0, size1-1);
 	//BogoSort(array, size1);
+	CountingSort(array1, size1);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 	cout << fixed << endl;
 	cout << "required " << elapsed_secs << "seconds" << endl;
-	for (int i = 0; i < size1; i++)	{ cout << array[i] << " ";	}
-
-}
+	for (int i = 0; i < size1; i++)	{ cout << array1[i] << " ";	}
+	}
 

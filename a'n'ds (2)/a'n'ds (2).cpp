@@ -106,11 +106,11 @@ void CountingSort(char* array, int size)
 	{ z = array[i];
 	count_array[z]++; 
 	}
-	for (int i =0 ; i < high_number; i++)
+	/*for (int i =0 ; i < high_number; i++)
 	{
 		cout << count_array[i]<<" ";
 	}
-	cout << endl;
+	cout << endl;*/
 	int i = 0;
 	for (int j = 0; j < high_number; j++) {
 		while (count_array[j] != 0) {
@@ -119,28 +119,65 @@ void CountingSort(char* array, int size)
 			i++;
 		}
 	}
+	delete count_array;
 }
 int main()
 {
 	srand(time(NULL));
-	int size1 = 10;
-	char* array1 = new char[size1];
-	for (int i = 0; i < size1; i++) { cin >> array1[i]; }//zyxwvutsrqp	))('&%$###!!!
+	int size = 10;
+	char* array_CountingSort = new char[size];for (int i = 0; i < size; i++) { array_CountingSort[i]=67 - i; cout << array_CountingSort[i]<<" ";}// CBA@?>=<;:
 	cout << endl;
-	for (int i = 0; i < size1; i++) { cout << array1[i]; }
-	auto* array = new int[size1];//use auto in case we have int & char type's of array
-	//for (int i = 0; i < size1; i++){array[i] = rand()%100;		cout << array[i] << " "; 	}
+	int* array_BinarySearch = new int[size];
+	int* array_BubbleSort= new int[size];
+	int* array_Bogosort= new int[size];
+	int* array_QuickSort= new int[size];
+	int* array_main = new int[size];	
+	for (int i = 0; i < size; i++)
+	{
+		array_main[i] = rand() % 100; 
+		array_BinarySearch[i] = i+1;//1-2-3-4-5-6-7-8-9-10
+		array_BubbleSort[i] = array_main[i];
+		array_Bogosort[i] = array_main[i];
+		array_QuickSort[i] = array_main[i];
+		cout << array_main[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < size; i++) {
+		cout << array_BinarySearch[i] << " ";
+	}
 	cout << endl;
 	clock_t begin = clock(); 
-//	cout<<BinarySearch(array, size1, 2);
-	//BubbleSort(array, size1);
-	//QuickSort(array, 0, size1-1);
-	//BogoSort(array, size1);
-	CountingSort(array1, size1);
+	cout<<"index with data 2 is"<<BinarySearch(array_BinarySearch, size, 2);
 	clock_t end = clock();
-	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-	cout << fixed << endl;
-	cout << "required " << elapsed_secs << "seconds" << endl;
-	for (int i = 0; i < size1; i++)	{ cout << array1[i] << " ";	}
+		double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+		cout << fixed << endl;
+		cout << "BinarySearch required " << elapsed_secs << "seconds" << endl;
+	 begin = clock();
+	BubbleSort(array_BubbleSort, size);  end = clock();
+		 elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+		cout << fixed << endl;
+		cout << "BubbleSort required " << elapsed_secs << "seconds" << endl;
+	 begin = clock();
+	QuickSort(array_QuickSort, 0, size-1); //need to compare with bubble
+		 end = clock();
+		 elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+		cout << fixed << endl;
+		cout << "QuickSort required " << elapsed_secs << "seconds" << endl;
+	 begin = clock(); 
+	BogoSort(array_Bogosort, size);
+		 end = clock();
+		 elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+		cout << fixed << endl;
+		cout << "BogoSort required " << elapsed_secs << "seconds" << endl;
+	 begin = clock(); 	
+	CountingSort(array_CountingSort, size);
+		 end = clock();
+		 elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+		cout << fixed << endl;
+		cout << "CountingSort required " << elapsed_secs << "seconds" << endl;
+		cout << "BubbleSort";	for (int i = 0; i < size; i++) { cout << array_BubbleSort[i] << " "; }cout << endl;
+		cout << "QuickSort";	for (int i = 0; i < size; i++) { cout << array_QuickSort[i] << " "; }cout << endl;
+		cout << "BogoSort";		for (int i = 0; i < size; i++) { cout << array_Bogosort[i] << " "; }cout << endl;
+		cout <<"CountingSort";	for (int i = 0; i < size; i++) { cout << array_CountingSort[i] << " "; }cout << endl;
 	}
 

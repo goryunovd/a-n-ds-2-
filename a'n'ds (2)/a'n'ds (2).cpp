@@ -121,6 +121,70 @@ void CountingSort(char* array, int size)
 	}
 	delete count_array;
 }
+
+void time_fuction(int* array_BubbleSort,int* array_QuickSort,  int size)
+{
+	clock_t end = clock(); clock_t begin = clock();
+	double elapsed_secs_B = double(end - begin) / CLOCKS_PER_SEC;//BubbleSort
+	double elapsed_secs_Q = double(end - begin) / CLOCKS_PER_SEC;//QuickSort
+	elapsed_secs_B = 0; elapsed_secs_Q = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		begin = clock();
+		BubbleSort(array_BubbleSort, size);  end = clock();
+		elapsed_secs_B += double(end - begin) / CLOCKS_PER_SEC;
+	}
+	elapsed_secs_B = elapsed_secs_B / 10;
+	cout << "10 BubbleSort["<<size<<"] required " << elapsed_secs_B << "seconds" << endl;
+	for (int i = 0; i < 10; i++) {
+		begin = clock();
+		QuickSort(array_QuickSort, 0, size - 1); 
+		end = clock(); elapsed_secs_Q += double(end - begin) / CLOCKS_PER_SEC; 
+	}
+	elapsed_secs_Q = elapsed_secs_Q / 10;
+	cout << "10 QucikSort [" << size << "] required " << elapsed_secs_Q << "seconds" << endl;
+	if (elapsed_secs_Q < elapsed_secs_B) { cout << "QuickSort is faster\n"; }
+	else { cout << "BubbleSort is faster\n"; }
+	cout << endl;
+
+}
+void Compare_of_2_sorts()
+{
+	srand(time(NULL));
+	int size =  10;
+	int size1 = 100;
+	int size2 = 1000;
+	int size3 = 10000;
+	int size4 = 100000;
+	int* array_QuickSort = new int[size];
+	int* array_QuickSort1 = new int[size1];
+	int* array_QuickSort2 = new int[size2];
+	int* array_QuickSort3 = new int[size3];
+	int* array_QuickSort4 = new int[size4];
+
+	int* array_BubbleSort = new int[size];
+	int* array_BubbleSort1 = new int[size1];
+	int* array_BubbleSort2 = new int[size2];
+	int* array_BubbleSort3 = new int[size3];
+	int* array_BubbleSort4 = new int[size4];
+	
+	clock_t end = clock(); clock_t begin = clock();
+	double elapsed_secs_B = double(end - begin) / CLOCKS_PER_SEC;//BubbleSort
+	double elapsed_secs_Q = double(end - begin) / CLOCKS_PER_SEC;//QuickSort
+	for (int i = 0; i < size; i++)	{ array_BubbleSort[i] = rand() % 100; 		array_QuickSort[i] = rand() % 100;	}
+	for (int i = 0; i < size1; i++) { array_BubbleSort1[i] = rand() % 100; 		array_QuickSort1[i] = rand() % 100; }
+	for (int i = 0; i < size2; i++) { array_BubbleSort2[i] = rand() % 100; 		array_QuickSort2[i] = rand() % 100; }
+	for (int i = 0; i < size3; i++) { array_BubbleSort3[i] = rand() % 100; 		array_QuickSort3[i] = rand() % 100; }
+	for (int i = 0; i < size4; i++) { array_BubbleSort4[i] = rand() % 100; 		array_QuickSort4[i] = rand() % 100; }
+	
+
+	time_fuction(array_BubbleSort, array_QuickSort, size);
+	time_fuction(array_BubbleSort1, array_QuickSort1, size1);
+	time_fuction(array_BubbleSort2, array_QuickSort2, size2);
+	time_fuction(array_BubbleSort3, array_QuickSort3, size3);
+	time_fuction(array_BubbleSort4, array_QuickSort4, size4);
+	delete array_QuickSort, array_QuickSort1, array_QuickSort2, array_QuickSort3, array_QuickSort4, array_BubbleSort, array_BubbleSort1, array_BubbleSort2, array_BubbleSort3, array_BubbleSort4;
+}
 int main()
 {
 	srand(time(NULL));
@@ -164,7 +228,7 @@ int main()
 		cout << fixed << endl;
 		cout << "QuickSort required " << elapsed_secs << "seconds" << endl;
 	 begin = clock(); 
-	BogoSort(array_Bogosort, size);
+	//BogoSort(array_Bogosort, size);
 		 end = clock();
 		 elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 		cout << fixed << endl;
@@ -179,5 +243,7 @@ int main()
 		cout << "QuickSort";	for (int i = 0; i < size; i++) { cout << array_QuickSort[i] << " "; }cout << endl;
 		cout << "BogoSort";		for (int i = 0; i < size; i++) { cout << array_Bogosort[i] << " "; }cout << endl;
 		cout <<"CountingSort";	for (int i = 0; i < size; i++) { cout << array_CountingSort[i] << " "; }cout << endl;
-	}
+		Compare_of_2_sorts();
+		delete array_BinarySearch, array_BubbleSort, array_Bogosort, array_QuickSort, array_main;
+}
 

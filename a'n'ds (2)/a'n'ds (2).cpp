@@ -28,7 +28,8 @@ int BinarySearch(int* array, int size, int data)// in binary search we have alre
 	}
 	else { throw invalid_argument("Current array is not sorted from low to high data\n"); }
 }
-void QuickSort(int* array, int low, int high) {
+void QuickSort(int* array, int low, int high) //choose middle element and sort near him
+{
 	int left = low;
 	int right = high;
 	int middle = array[(left + right) / 2];
@@ -50,22 +51,20 @@ void QuickSort(int* array, int low, int high) {
 		}
 	}
 	if (right > low)
-		QuickSort(array, low, right);
+		QuickSort(array, low, right);//go sort left part
 	if (left < high)
-		QuickSort(array, left, high);
+		QuickSort(array, left, high);//go sort right part
 }
-void BubbleSort(int* array, int size) 
+void BubbleSort(int* array, int size) //alway compare elements and if previous is bigger swap them
 {
-	bool flag; int tmp;
+	bool flag; 
 	for (int i = 0; i < size; i++)
 	{
 		flag = 0;
 		for (int j = size - 1; j > i; j--)
 			if (array[j - 1] > array[j])
 			{
-				tmp = array[j - 1];
-				array[j - 1] = array[j];
-				array[j] = tmp;
+				swap(array[j - 1], array[j]);
 				flag = 1;
 			}
 		if (flag == 0) break;
@@ -80,12 +79,12 @@ bool isSorted(int* array, int size)
 	
 	return true;
 }
-void send_to_god_of_random(int* array, int size)
+void send_to_god_of_random(int* array, int size)//random change of elements
 {
 	for (int i = 0; i < size; i++)
 		swap(array[i], array[rand() % size]);
 }
-void BogoSort(int* array, int size)
+void BogoSort(int* array, int size)//if array isn't sorted let the random sort it
 {
 	while (!isSorted(array, size))
 		send_to_god_of_random(array, size);
@@ -95,22 +94,17 @@ void CountingSort(char* array, int size)
 //ASCII table
 {
 	int high_number = 0; int z;
-	for (int i=0;i<size;i++)	{		if (array[i] > high_number) { high_number = array[i];}	}
+	for (int i=0;i<size;i++)	{		if (array[i] > high_number) { high_number = array[i];}	}//find the highest number in ASCCII ttable
 	high_number++;
 	int* count_array = new int[high_number];
-	for (int i =0 ; i < high_number; i++) //lets count how many 
+	for (int i =0 ; i < high_number; i++) //make NULL augmented array
 	{
 		count_array[i] = 0;
 	}
-	for (int i = 0; i < size; i++) 
+	for (int i = 0; i < size; i++) //in augmented[array[i]] we count how many this symbol we meet 
 	{ z = array[i];
 	count_array[z]++; 
 	}
-	/*for (int i =0 ; i < high_number; i++)
-	{
-		cout << count_array[i]<<" ";
-	}
-	cout << endl;*/
 	int i = 0;
 	for (int j = 0; j < high_number; j++) {
 		while (count_array[j] != 0) {
@@ -122,7 +116,7 @@ void CountingSort(char* array, int size)
 	delete count_array;
 }
 
-void time_fuction(int* array_BubbleSort,int* array_QuickSort,  int size)
+void time_fuction(int* array_BubbleSort,int* array_QuickSort,  int size)//to compare 2 times of different algorthimes 
 {
 	clock_t end = clock(); clock_t begin = clock();
 	double elapsed_secs_B = double(end - begin) / CLOCKS_PER_SEC;//BubbleSort
@@ -156,6 +150,7 @@ void Compare_of_2_sorts()
 	int size2 = 1000;
 	int size3 = 10000;
 	int size4 = 100000;
+	
 	int* array_QuickSort = new int[size];
 	int* array_QuickSort1 = new int[size1];
 	int* array_QuickSort2 = new int[size2];
@@ -189,7 +184,8 @@ int main()
 {
 	srand(time(NULL));
 	int size = 10;
-	char* array_CountingSort = new char[size];for (int i = 0; i < size; i++) { array_CountingSort[i]=67 - i; cout << array_CountingSort[i]<<" ";}// CBA@?>=<;:
+	char* array_CountingSort = new char[size];for (int i = 0; i < size; i++) 
+	{ array_CountingSort[i]=67 - i; cout << array_CountingSort[i]<<" ";}// CBA@?>=<;:
 	cout << endl;
 	int* array_BinarySearch = new int[size];
 	int* array_BubbleSort= new int[size];
@@ -228,7 +224,7 @@ int main()
 		cout << fixed << endl;
 		cout << "QuickSort required " << elapsed_secs << "seconds" << endl;
 	 begin = clock(); 
-	//BogoSort(array_Bogosort, size);
+	BogoSort(array_Bogosort, size);
 		 end = clock();
 		 elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 		cout << fixed << endl;

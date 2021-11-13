@@ -33,7 +33,7 @@ void QuickSort(int* array, int low, int high) //choose middle element and sort n
 	int left = low;
 	int right = high;
 	int middle = array[(left + right) / 2];
-	int tmp;
+
 
 	while (left <= right)
 	{
@@ -43,9 +43,7 @@ void QuickSort(int* array, int low, int high) //choose middle element and sort n
 			right--;
 		if (left <= right)
 		{
-			tmp = array[left];
-			array[left] = array[right];
-			array[right] = tmp;
+			swap(array[left], array[right]);
 			left++;
 			right--;
 		}
@@ -64,7 +62,7 @@ void BubbleSort(int* array, int size) //alway compare elements and if previous i
 		for (int j = size - 1; j > i; j--)
 			if (array[j - 1] > array[j])
 			{
-				swap(array[j - 1], array[j]);
+				swap(array[j], array[j - 1]);
 				flag = 1;
 			}
 		if (flag == 0) break;

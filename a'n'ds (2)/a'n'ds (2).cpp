@@ -91,7 +91,7 @@ void CountingSort(char* array, int size)
 //for this sort we use array of type char but we can also sort as int in case char has his own int index am i right?0-0
 //ASCII table
 {
-	int high_number = 0; int z;
+	int high_number = 0; int tmp;
 	for (int i=0;i<size;i++)	{		if (array[i] > high_number) { high_number = array[i];}	}//find the highest number in ASCCII ttable
 	high_number++;
 	int* count_array = new int[high_number];
@@ -100,8 +100,8 @@ void CountingSort(char* array, int size)
 		count_array[i] = 0;
 	}
 	for (int i = 0; i < size; i++) //in augmented[array[i]] we count how many this symbol we meet 
-	{ z = array[i];
-	count_array[z]++; 
+	{ tmp = array[i];
+	count_array[tmp]++; 
 	}
 	int i = 0;
 	for (int j = 0; j < high_number; j++) {
